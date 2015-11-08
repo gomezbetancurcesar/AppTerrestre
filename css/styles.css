@@ -1,0 +1,101 @@
+body{
+	/*overflow-y: hidden;*/
+}
+
+header{
+	background-color: #286090;
+	color: #F0F0F0;
+	height: 110px;
+}
+
+footer{
+	background-color: #616161;
+	height: 25px;
+	color: #F0F0F0;
+}
+
+.container-fluid{
+	min-height: 626px;
+}
+
+.black-layer{
+	width: 2080px;
+	height: 100%;
+	background-color: #000;
+	z-index: 1;
+	position: fixed;
+	opacity: 0.8;
+	overflow-y: hidden;
+}
+
+.detalles{
+	width: 350px;
+	z-index: 2;
+	position: fixed;
+	top: 30%;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+.cerrar > a{
+	background: url('../img/close.png');
+	width: 24px;
+	height: 24px;
+	display: inline-block;
+	z-index: 2;
+	cursor: pointer;
+	position: absolute;
+	top: -30px;
+	right: -30px;
+}
+
+.detalles > .detalle-body{
+	background-color: #fff;
+	padding: 15px 5px;
+	border: solid 1px #000;
+	border-radius: 5px;
+}
+
+.hide{
+	display: none;
+}
+
+.mbot{
+	margin-bottom: 15px;
+}
+
+.mensaje{
+	    background-color: black;
+	    border-radius: 6px;
+	    color: white;
+	    font-size: 11px;
+	    font-style: italic;
+	    opacity: 0.65;
+	    padding: 5px 15px;
+	    position: absolute;
+	    left: -10px;
+}
+
+.error{
+	border: 1px solid red;
+	background-color: pink;
+}
+
+.icono-calendario{
+	background: url('../img/calendario.png');
+	display: inline-block;
+    height: 16px;
+    position: absolute;
+    right: 20px;
+    top: 9px;
+    width: 16px;
+    cursor: pointer;
+}
+
+.ver-detalles{
+	background: url('../img/ver.png');
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+}
