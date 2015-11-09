@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 function pr($array){
 	echo "<pre>";
 	print_r($array);
@@ -13,10 +14,14 @@ if(isset($_POST['agregar'])){
 	$terrestre['rut'] = $_POST['rut'];
 	$terrestre['cantidad'] = $_POST['cantidad'];
 	$terrestre['pais_origen'] = $_POST['pais_origen'];
-	$terrestre['pais_origen'] = $_POST['pais_origen'];
 	$_SESSION['TERRESTRE'][] = $terrestre;
 	header('LOCATION: terrestre.php');
 }elseif(isset($_POST['enviar'])){
+	require_once "class/WebService.php";
+	$WebService = new WebService();
+	$WebService->crearMensaje($_SESSION['TERRESTRE']);
+	$WebService->llamarMetodo();
+
 	die("FORMATEAR XML Y CONECTAR");
 }else{
 	die("NO ACCEDER");

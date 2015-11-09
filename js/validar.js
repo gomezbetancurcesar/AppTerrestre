@@ -19,7 +19,8 @@ function validarRut(Rut,Digito){
         return digitoCaracter;
 }
 
-$(document).on("ready", function(){
+$(document).on("ready", function(e){
+		var validarSubmit = true;
 		var msgError = "<span class=\"mensaje\">Dato incorrecto</span>";
 
 		var validaciones = {
@@ -51,67 +52,76 @@ $(document).on("ready", function(){
 			$(this).closest('.row').find('.error-container').fadeOut();
 		});
 
-		$('.formulario').on("submit", function(){
-			var errores = 0;
-			$(this).find('input[type=text]').removeClass('error');
-			$('.error-container').hide();
-			$('.error-container').html('');
+		$('.formulario').on("submit", function(e){
+			if(validarSubmit){
+				var errores = 0;
+				$(this).find('input[type=text]').removeClass('error');
+				$('.error-container').hide();
+				$('.error-container').html('');
 
-			$(this).find('input[type=text]').each(function(){
-				var inputName = $(this).prop('name');
-				var valor = $(this).val();
-				var validar = validaciones[inputName];
-				var error = true;
+				$(this).find('input[type=text]').each(function(){
+					var inputName = $(this).prop('name');
+					var valor = $(this).val();
+					var validar = validaciones[inputName];
+					var error = true;
 
-				if(validar.hasOwnProperty('notEmpty')){
-					if(valor != ""){
-						error = false;	
+					if(validar.hasOwnProperty('notEmpty')){
+						if(valor != ""){
+							error = false;	
+						}
 					}
-				}
 
-				if(validar.hasOwnProperty('numeric')){
-					if($.isNumeric(valor)){
-						error = false;
-					}else{
-						error = true;
+					if(validar.hasOwnProperty('numeric')){
+						if($.isNumeric(valor)){
+							error = false;
+						}else{
+							error = true;
+						}
 					}
-				}
 
-				if(validar.hasOwnProperty('rut')){
-					if(valor != ""){
-						var rutAux = valor;
-                        var tmp = rutAux.split("-");
-                        
-                        if(tmp.length > 1){
-                                var rut = tmp[0];
-                                var digVer = tmp[1];
-                                digVer = digVer.toUpperCase();
+					if(validar.hasOwnProperty('rut')){
+						if(valor != ""){
+							var rutAux = valor;
+	                        var tmp = rutAux.split("-");
+	                        
+	                        if(tmp.length > 1){
+	                                var rut = tmp[0];
+	                                var digVer = tmp[1];
+	                                digVer = digVer.toUpperCase();
 
-                                if ( validarRut(rut,digVer) == digVer ){
-                                		//No es un rut valido
-                                        error = false;
-                                }else{
-                                      error = true;  
-                                }
-                        }else{
-                                //No tiene formato de rut.
-                                error = false;
-                        }
+	                                if ( validarRut(rut,digVer) == digVer ){
+	                                		//No es un rut valido
+	                                        error = false;
+	                                }else{
+	                                      error = true;  
+	                                }
+	                        }else{
+	                                //No tiene formato de rut.
+	                                error = false;
+	                        }
+						}
 					}
-				}
 
-				if(error){
-					errores++;
-					$(this).addClass('error');
-					$(this).closest('.row').find('.error-container').hide();
-					$(this).closest('.row').find('.error-container').html('');
-					$(this).closest('.row').find('.error-container').html(msgError);
-					$(this).closest('.row').find('.error-container').fadeIn();
-				}
-			});
+					if(error){
+						errores++;
+						$(this).addClass('error');
+						$(this).closest('.row').find('.error-container').hide();
+						$(this).closest('.row').find('.error-container').html('');
+						$(this).closest('.row').find('.error-container').html(msgError);
+						$(this).closest('.row').find('.error-container').fadeIn();
+					}
+				});
 
-			if(errores > 0){
-				return false
+				if(errores > 0){
+					return false
+				}
 			}
+		});
+
+		$('.enviar').click(function(e){
+			e.preventDefault();
+			validarSubmit = false;
+			$('.formulario').append("<input type=\"hidden\" name=\"enviar\"  value=\"1\">");
+			$('.formulario').submit();
 		});
 });

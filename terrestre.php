@@ -33,8 +33,8 @@
   		<h1>Sistema Terrestre</h1>
   	</header>
   	<div class="container-fluid">
+  		<form action="./guardar.php" method="post" class="formulario">
 		<div class="col-md-6 text-center">
-			<form action="./guardar.php" method="post" class="formulario">
 				<div class="col-md-12 mbot row">
 					<label for="codigo" class="col-md-4">Código</label>
 					<div class="col-md-4">
@@ -87,17 +87,15 @@
 				<div class="col-md-12 text-center">
 					<div class="col-md-8">
 						<input type="submit" value="Agregar" name="agregar" class="btn btn-success btn-default">
-						<input type="submit" value="Enviar" name="enviar" class="btn btn-default btn-primary">
 					</div>
 				</div>
-			</form>
 		</div>
 		<div class="col-md-6">
 			<?php
 					if(!empty($agregados)){
 						?>
   						<p>Últimos agregados:</p>
-						<table class="table table-striped">
+						<table class="table table-striped table-hover">
 							<thead>
 								<tr>
 									<th>Código</th>
@@ -127,6 +125,11 @@
 										<?php
 									}
 								?>
+								<tr>
+									<td colspan="4" class="text-center">
+										<a class="btn btn-default btn-primary enviar">Enviar</a>
+									</td>
+								</tr>
 							</tbody>
 						</table>
 						<?php
@@ -137,6 +140,7 @@
 					}
 			?>
 		</div>
+		</form>
 	</div>
 	<footer class="text-center">
 		Desarrollado por Lucero Quijano - Duoc UC 2015
