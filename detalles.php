@@ -41,7 +41,7 @@
 				</div>
 		</div>
 		<div class="col-md-12 text-center">
-			<button class="btn btn-danger eliminar">Eliminar</button>
+			<!--<button class="btn btn-danger eliminar">Eliminar</button>-->
 			<button class="btn btn-default cancelar">Cancelar</button>
 		</div>
 </div>

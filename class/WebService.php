@@ -1,4 +1,5 @@
 <?php
+require_once 'ClassTerrestre.php';
 
 class WebService{
 	private $soapWebService;
@@ -11,7 +12,7 @@ class WebService{
 	}
 
 	private function generarXmlBody($options = array()){
-	  	foreach ($options as &$value){
+	  	foreach ($options as $value){
                 if (is_array($value)) {
                         $value = $this->generarXmlBody($value);
                 }
@@ -20,14 +21,30 @@ class WebService{
 	}
 
 	public function crearMensaje($datos = array()){
-		//$this->mensaje = $this->generarXmlBody($datos);
-		$this->mensaje = $this->generarXmlBody(array('name' => 999));
+        $return = new ArrayObject();
+        $this->mensaje = new stdClass();
+        
+        foreach ($datos as $datosTerrestre){
+            $Terretre = new Terrestre();
+            foreach ($datosTerrestre as $campo => $valor){
+                $Terretre->{$campo} = $valor;
+            }
+            $Terretre = new SoapVar($Terretre, SOAP_ENC_OBJECT, null, null, 'transacciones');
+            $return->append($Terretre);
+        }
+        $this->mensaje = new SoapVar($return, SOAP_ENC_OBJECT, null ,null, "aaa");
 	}
 
 	public function llamarMetodo($nombre = "TEST"){
-		$a = $this->soapWebService->$nombre(new SoapParam($this->mensaje, 'Data'));
-		pr($a);
-		$this->debugger();
+        $return = false;
+        try{
+            $respuesta = $this->soapWebService->$nombre($this->mensaje);
+            $return = true;
+        } catch (Exception $ex) {
+            $return = false;
+        }
+        return $return;
+		//$this->debugger();
 	}
 
 	public function debugger(){

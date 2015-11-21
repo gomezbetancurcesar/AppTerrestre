@@ -35,6 +35,24 @@
   	<div class="container-fluid">
   		<form action="./guardar.php" method="post" class="formulario">
 		<div class="col-md-6 text-center">
+                <?php
+                    if(isset($_SESSION['respuesta'])){
+                        if($_SESSION['respuesta']){
+                            ?>
+                                <div class="col-lg-5 alert alert-success">
+                                    <strong>OK</strong>, los datos se han enviado correctamente
+                                </div>
+                            <?php
+                        }else{
+                            ?>
+                                <div class="col-lg-5 alert alert-warning">
+                                    <strong>ERROR</strong>, los datos no se han podido enviar
+                                </div>
+                            <?php
+                        }
+                        unset($_SESSION['respuesta']);
+                    }
+                ?>
 				<div class="col-md-12 mbot row">
 					<label for="codigo" class="col-md-4">Código</label>
 					<div class="col-md-4">

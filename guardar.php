@@ -20,8 +20,9 @@ if(isset($_POST['agregar'])){
 	require_once "class/WebService.php";
 	$WebService = new WebService();
 	$WebService->crearMensaje($_SESSION['TERRESTRE']);
-	$WebService->llamarMetodo();
-
+    $_SESSION['respuesta'] = $WebService->llamarMetodo();
+    unset($_SESSION['TERRESTRE']);
+    header('LOCATION: terrestre.php');
 	die("FORMATEAR XML Y CONECTAR");
 }else{
 	die("NO ACCEDER");
