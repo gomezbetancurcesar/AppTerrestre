@@ -28,7 +28,7 @@ if(isset($_POST['agregar'])){
     
     $_SESSION['respuesta'] = $WebService->llamarMetodo();
     unset($_SESSION['TERRESTRE']);
-    header('LOCATION: terrestre.php');
+    header('LOCATION: index.php');
 }else{
 	die("NO ACCEDER");
 }
