@@ -19,11 +19,16 @@ if(isset($_POST['agregar'])){
 }elseif(isset($_POST['enviar'])){
 	require_once "class/WebService.php";
 	$WebService = new WebService();
+    
+    //Llamar al Soap con una respuesta automatica
 	$WebService->crearMensaje($_SESSION['TERRESTRE']);
+    
+    //Llamar al Soap con una respuesta manual
+    //$WebService->crearMensajeManual($_SESSION['TERRESTRE']);
+    
     $_SESSION['respuesta'] = $WebService->llamarMetodo();
     unset($_SESSION['TERRESTRE']);
     header('LOCATION: terrestre.php');
-	die("FORMATEAR XML Y CONECTAR");
 }else{
 	die("NO ACCEDER");
 }

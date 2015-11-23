@@ -1,5 +1,7 @@
 $(document).on("ready", function(){
-		$('#calendario').datepicker();
+		$('#calendario').datepicker({
+                    dateFormat: "yy/mm/dd"
+                });
 
 		$('.icono-calendario').click(function(){
 			$(this).prev('input').focus();
